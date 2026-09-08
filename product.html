@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pink Pretty Hamper | Blush & Bow</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="product.css">
+<link rel="stylesheet" href="cart-add.css">
+</head>
+
+<body data-product-id="pink-pretty-hamper"
+      data-product-name="Pink Pretty Hamper"
+      data-product-price="199"
+      data-product-description="6 clips + 2 satin accessories + 4 hair clips">
+
+<div class="top-bar">🎀 FREE SHIPPING ON ORDERS ABOVE ₹499 🎀</div>
+
+<header class="site-header">
+<div class="nav container">
+<a href="index.html" class="brand">
+<span class="brand-name">Blush &amp; Bow</span>
+<span class="brand-sub">BEAUTIFULLY PACKED</span>
+</a>
+<nav class="menu">
+<a href="index.html">Home</a>
+<a class="active" href="shop.html">Shop</a>
+<a href="index.html#hampers">Gift Hampers</a>
+<a href="index.html#about">About Us</a>
+<a href="index.html#contact">Contact</a>
+</nav>
+<div class="nav-actions">
+<button>⌕</button>
+<button class="cart-icon" onclick="location.href='cart.html'">🛍 <span data-cart-count>0</span></button>
+</div>
+</div>
+</header>
+
+<main>
+<section class="product-page">
+<div class="container product-layout">
+
+<div class="gallery">
+<div class="main-photo"><span>YOUR PRODUCT PHOTO</span><small>B&amp;B</small></div>
+<div class="thumbs">
+<button class="thumb active">PHOTO 1</button>
+<button class="thumb">PHOTO 2</button>
+<button class="thumb">PHOTO 3</button>
+<button class="thumb">PHOTO 4</button>
+</div>
+</div>
+
+<div class="product-copy">
+<span class="product-tag">B&amp;B BESTSELLER</span>
+<h1>Pink Pretty Hamper</h1>
+<div class="rating">★★★★★ <span>New collection</span></div>
+<div class="price">₹199</div>
+
+<p class="intro">
+A cute little hair-accessories hamper, beautifully packed and ready
+to gift or keep for yourself.
+</p>
+
+<div class="included">
+<h2>What's inside?</h2>
+<ul>
+<li>6 pastel claw / clutch clips</li>
+<li>2 satin rubber bands / scrunchies</li>
+<li>4 cute hair clips</li>
+<li>1 pretty gift box with soft filler</li>
+</ul>
+</div>
+
+<div class="quantity">
+<span>Quantity</span>
+<div class="qty-control">
+<button id="minus" type="button">−</button>
+<strong id="qty">1</strong>
+<button id="plus" type="button">+</button>
+</div>
+</div>
+
+<div class="actions">
+<button class="add-button" data-add-product type="button">ADD TO CART</button>
+<button class="buy-button" data-buy-now type="button">BUY NOW</button>
+</div>
+
+<div class="trust">
+<div><span>🎁</span><strong>Gift Ready</strong><small>Beautiful packaging</small></div>
+<div><span>📦</span><strong>Carefully Packed</strong><small>Made for happy deliveries</small></div>
+<div><span>💗</span><strong>Made With Love</strong><small>Curated by B&amp;B</small></div>
+</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container footer-grid">
+<div><h3>Blush &amp; Bow</h3><p>Little things, beautifully packed.</p></div>
+<div><h4>Quick Links</h4><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="index.html#hampers">Gift Hampers</a></div>
+<div><h4>Help</h4><a href="index.html#contact">Contact</a><a href="#">Shipping &amp; Returns</a><a href="#">Privacy Policy</a></div>
+</div>
+<div class="copyright">© 2026 Blush &amp; Bow. All rights reserved.</div>
+</footer>
+
+<script>
+document.getElementById("plus").onclick = () => {
+  const q = document.getElementById("qty");
+  q.textContent = Number(q.textContent) + 1;
+};
+
+document.getElementById("minus").onclick = () => {
+  const q = document.getElementById("qty");
+  q.textContent = Math.max(1, Number(q.textContent) - 1);
+};
+</script>
+<script src="script.js"></script>
+</body>
+</html>

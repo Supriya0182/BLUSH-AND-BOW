@@ -1,0 +1,103 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Secure Payment | Blush & Bow</title><link rel="stylesheet" href="style.css"><link rel="stylesheet" href="checkout.css"></head><body><div class="top-bar">🎀 BLUSH &amp; BOW • SECURE ONLINE PAYMENT 🎀</div><header class="site-header"><div class="nav container"><a href="index.html" class="brand"><span class="brand-name">Blush &amp; Bow</span><span class="brand-sub">BEAUTIFULLY PACKED</span></a><div class="nav-actions"><button class="cart-icon" onclick="location.href='cart.html'">🛍 <span data-cart-count>0</span></button></div></div></header><main>
+<section class="payment-page">
+<div class="container">
+<div class="checkout-card payment-card">
+  <p class="eyebrow">STEP 03 • PAYMENT</p>
+  <h1>Pay securely ♡</h1>
+  <p class="payment-intro">Pay using UPI. On supported phones, your UPI app can open directly; on desktop, Razorpay can show a scannable UPI QR.</p>
+
+  <div class="payment-choice-grid">
+    <div class="payment-choice active" style="cursor:default">
+      <span class="choice-icon">⌁</span>
+      <span><strong>UPI</strong><small>Google Pay · PhonePe · Paytm &amp; more</small></span>
+      <span class="choice-check">✓</span>
+    </div>
+    <div class="payment-choice" style="cursor:default">
+      <span class="choice-icon">▦</span>
+      <span><strong>Scan QR</strong><small>Razorpay can show a dynamic UPI QR on desktop</small></span>
+      <span class="choice-check">✓</span>
+    </div>
+  </div>
+
+  <div class="qr-info" id="qrInfo">
+    <div class="qr-placeholder">▦</div>
+    <div><strong>QR appears in secure payment</strong><p>For desktop checkout, choose UPI and Razorpay will provide the available UPI payment/QR experience for your account.</p></div>
+  </div>
+
+  <div class="pay-amount-row"><span>Amount to pay</span><strong id="payAmount">₹0</strong></div>
+  <button class="pay-button" id="payBtn" type="button">CONTINUE WITH UPI →</button>
+  <p class="secure-note">🔒 Secure Razorpay checkout · Test Mode · No real money will be charged</p>
+  <p class="upi-note">For security and current UPI rules, this checkout does not ask customers to manually enter a UPI ID. UPI Intent/QR is used instead.</p>
+</div>
+</div>
+</section>
+</main><script src="https://checkout.razorpay.com/v1/checkout.js"></script><script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+  const order = JSON.parse(localStorage.getItem('blushAndBowPendingOrder') || 'null');
+  if (!order) { location.href = 'cart.html'; return; }
+  const amount = Number(order.total || 0);
+  const amountEl = document.getElementById('payAmount');
+  const payBtn = document.getElementById('payBtn');
+  const qrInfo = document.getElementById('qrInfo');
+  amountEl.textContent = formatMoney(amount);
+
+  payBtn.addEventListener('click', async () => {
+    if (!window.Razorpay) return alert('Payment service could not load. Please check your internet connection.');
+    if (amount <= 0) return alert('Invalid order amount. Please return to cart.');
+    const customer = order.customer || {};
+    payBtn.disabled = true; payBtn.textContent = 'CREATING SECURE ORDER…';
+    try {
+      const createRes = await fetch('/api/create-order', {method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({amount,customer})});
+      const created = await createRes.json();
+      if (!createRes.ok) throw new Error(created.error || 'Could not create payment order');
+      const options = {
+        key: created.keyId,
+        order_id: created.id,
+        amount: created.amount,
+        currency: created.currency,
+        name: 'Blush & Bow',
+        description: 'Blush & Bow Gift Hamper',
+        prefill: {name:customer.name||'',email:customer.email||'',contact:customer.mobile||''},
+        notes: {address:customer.address||'',city:customer.city||'',state:customer.state||'',pincode:customer.pincode||''},
+        method: 'upi',
+        config: {
+          display: {
+            blocks: {
+              upi_only: {
+                name: 'Pay via UPI',
+                instruments: [
+                  { method: 'upi' }
+                ]
+              }
+            },
+            sequence: ['block.upi_only'],
+            preferences: {
+              show_default_blocks: false
+            }
+          }
+        },
+        theme: {color:'#a6536b'},
+        handler: async function(response) {
+          try {
+            const vr = await fetch('/api/verify-payment',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({orderId:created.id,paymentId:response.razorpay_payment_id,signature:response.razorpay_signature})});
+            const verified = await vr.json();
+            if (!vr.ok || !verified.verified) throw new Error('Payment verification failed');
+            const orderId='BBA'+Date.now().toString().slice(-8);
+            const completedOrder={...order,orderId,paymentId:response.razorpay_payment_id,razorpayOrderId:created.id,paymentStatus:'paid',paidAt:new Date().toISOString()};
+            localStorage.setItem('blushAndBowLastOrder',JSON.stringify(completedOrder));
+            localStorage.removeItem('blushAndBowCart'); localStorage.removeItem('blushAndBowPendingOrder');
+            location.href='order-confirmed.html';
+          } catch(e) { payBtn.disabled=false; alert(e.message); }
+        },
+        modal:{ondismiss:function(){payBtn.disabled=false;}}
+      };
+      const razorpay=new Razorpay(options);
+      razorpay.on('payment.failed',function(){payBtn.disabled=false;alert('Payment failed or was cancelled. Please try again.');});
+      payBtn.textContent='OPENING UPI PAYMENT…'; razorpay.open();
+    } catch(e) { payBtn.disabled=false;alert(e.message); }
+  });
+});
+</script>
+</body>
+</html>

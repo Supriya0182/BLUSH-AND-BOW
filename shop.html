@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Shop | Blush & Bow</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="shop.css">
+<link rel="stylesheet" href="cart-add.css">
+</head>
+<body>
+<div class="top-bar">🎀 FREE SHIPPING ON ORDERS ABOVE ₹499 🎀</div>
+
+<header class="site-header">
+<div class="nav container">
+<a href="index.html" class="brand"><span class="brand-name">Blush &amp; Bow</span><span class="brand-sub">BEAUTIFULLY PACKED</span></a>
+<nav class="menu">
+<a href="index.html">Home</a><a class="active" href="shop.html">Shop</a>
+<a href="index.html#hampers">Gift Hampers</a><a href="index.html#about">About Us</a><a href="index.html#contact">Contact</a>
+</nav>
+<div class="nav-actions"><button>⌕</button><button class="cart-icon" onclick="location.href='cart.html'">🛍 <span data-cart-count>0</span></button></div>
+</div>
+</header>
+
+<main>
+<section class="shop-hero"><div class="container"><p class="eyebrow">THE B&amp;B COLLECTION</p><h1>Find Your Pretty</h1><p>Little accessories, lovely hampers and gifts made to make someone smile.</p></div></section>
+
+<section class="shop-section"><div class="container">
+<div class="shop-toolbar">
+<div class="filters">
+<button class="filter active" data-filter="all">All</button>
+<button class="filter" data-filter="hamper">Gift Hampers</button>
+<button class="filter" data-filter="claw">Claw Clips</button>
+<button class="filter" data-filter="scrunchie">Scrunchies</button>
+<button class="filter" data-filter="clip">Hair Clips</button>
+</div>
+<select id="sortProducts"><option value="default">Sort: Featured</option><option value="low">Price: Low to High</option><option value="high">Price: High to Low</option></select>
+</div>
+
+<div class="shop-grid" id="productGrid">
+
+<article class="shop-product" data-category="hamper" data-price="199" data-id="pink-pretty-hamper" data-name="Pink Pretty Hamper">
+<div class="shop-image">PRODUCT PHOTO</div><div class="shop-info"><span class="tag">BESTSELLER</span><h2>Pink Pretty Hamper</h2><p>6 clips + 2 satin accessories + 4 hair clips.</p>
+<div class="shop-bottom"><strong>₹199</strong><button class="add-cart" data-shop-add type="button">ADD TO CART</button></div></div></article>
+
+<article class="shop-product" data-category="hamper" data-price="299" data-id="birthday-box" data-name="Birthday Box">
+<div class="shop-image">PRODUCT PHOTO</div><div class="shop-info"><span class="tag">GIFTING</span><h2>Birthday Box</h2><p>A pretty little gift box for birthdays and special days.</p>
+<div class="shop-bottom"><strong>₹299</strong><button class="add-cart" data-shop-add type="button">ADD TO CART</button></div></div></article>
+
+<article class="shop-product" data-category="claw" data-price="149" data-id="pastel-claw-set" data-name="Pastel Claw Set">
+<div class="shop-image">PRODUCT PHOTO</div><div class="shop-info"><span class="tag">NEW</span><h2>Pastel Claw Set</h2><p>A cute set of pastel claw clips for everyday styling.</p>
+<div class="shop-bottom"><strong>₹149</strong><button class="add-cart" data-shop-add type="button">ADD TO CART</button></div></div></article>
+
+<article class="shop-product" data-category="scrunchie" data-price="129" data-id="satin-scrunchie-set" data-name="Satin Scrunchie Set">
+<div class="shop-image">PRODUCT PHOTO</div><div class="shop-info"><span class="tag">SOFT</span><h2>Satin Scrunchie Set</h2><p>Soft satin scrunchies in pretty everyday shades.</p>
+<div class="shop-bottom"><strong>₹129</strong><button class="add-cart" data-shop-add type="button">ADD TO CART</button></div></div></article>
+
+<article class="shop-product" data-category="clip" data-price="99" data-id="pretty-hair-clips" data-name="Pretty Hair Clips">
+<div class="shop-image">PRODUCT PHOTO</div><div class="shop-info"><span class="tag">CUTE</span><h2>Pretty Hair Clips</h2><p>Four delicate clips to complete your everyday look.</p>
+<div class="shop-bottom"><strong>₹99</strong><button class="add-cart" data-shop-add type="button">ADD TO CART</button></div></div></article>
+
+<article class="shop-product" data-category="hamper" data-price="249" data-id="everyday-hair-hamper" data-name="Everyday Hair Hamper">
+<div class="shop-image">PRODUCT PHOTO</div><div class="shop-info"><span class="tag">POPULAR</span><h2>Everyday Hair Hamper</h2><p>A curated mix of pretty essentials for everyday use.</p>
+<div class="shop-bottom"><strong>₹249</strong><button class="add-cart" data-shop-add type="button">ADD TO CART</button></div></div></article>
+
+</div>
+<p id="emptyState" class="empty-state">No products found in this category.</p>
+</div></section>
+</main>
+
+<footer>
+<div class="container footer-grid">
+<div><h3>Blush &amp; Bow</h3><p>Little things, beautifully packed.</p></div>
+<div><h4>Quick Links</h4><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="index.html#hampers">Gift Hampers</a></div>
+<div><h4>Help</h4><a href="index.html#contact">Contact</a><a href="#">Shipping &amp; Returns</a><a href="#">Privacy Policy</a></div>
+</div>
+<div class="copyright">© 2026 Blush &amp; Bow. All rights reserved.</div>
+</footer>
+
+<script src="script.js"></script>
+<script>
+document.querySelectorAll("[data-shop-add]").forEach(button => {
+  button.addEventListener("click", () => {
+    const card = button.closest(".shop-product");
+    addToCart({
+      id: card.dataset.id,
+      name: card.dataset.name,
+      price: Number(card.dataset.price),
+      description: card.querySelector(".shop-info p").textContent,
+      tag: card.querySelector(".tag").textContent,
+      shortName: "B&B"
+    }, 1, button);
+  });
+});
+
+document.querySelectorAll(".filter").forEach(btn => {
+  btn.addEventListener("click", () => {
+    document.querySelectorAll(".filter").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    const category = btn.dataset.filter;
+    let count = 0;
+    document.querySelectorAll(".shop-product").forEach(card => {
+      const show = category === "all" || card.dataset.category === category;
+      card.style.display = show ? "" : "none";
+      if (show) count++;
+    });
+    document.querySelector("#emptyState").style.display = count ? "none" : "block";
+  });
+});
+
+document.querySelector("#sortProducts").addEventListener("change", e => {
+  const grid = document.querySelector("#productGrid");
+  const cards = [...grid.querySelectorAll(".shop-product")];
+  cards.sort((a,b) => {
+    const x = Number(a.dataset.price), y = Number(b.dataset.price);
+    if (e.target.value === "low") return x-y;
+    if (e.target.value === "high") return y-x;
+    return 0;
+  });
+  cards.forEach(card => grid.appendChild(card));
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Checkout | Blush & Bow</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="checkout.css">
+</head>
+<body>
+<div class="top-bar">🎀 FREE SHIPPING ON ORDERS ABOVE ₹499 🎀</div>
+<header class="site-header">
+  <div class="nav container">
+    <a href="index.html" class="brand"><span class="brand-name">Blush &amp; Bow</span><span class="brand-sub">BEAUTIFULLY PACKED</span></a>
+    <nav class="menu"><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="index.html#hampers">Gift Hampers</a><a href="index.html#about">About Us</a><a href="index.html#contact">Contact</a></nav>
+    <div class="nav-actions"><button>⌕</button><button class="cart-icon" onclick="location.href='cart.html'" aria-label="Cart">🛍 <span data-cart-count>0</span></button></div>
+  </div>
+</header>
+
+<main>
+<section class="checkout-hero"><div class="container"><p class="eyebrow">B&amp;B CHECKOUT</p><h1>Let's make it yours ♡</h1><p>Enter your delivery details and continue to secure online payment.</p></div></section>
+
+<section class="checkout-section">
+<div class="container checkout-grid">
+  <form class="checkout-card" id="checkoutForm">
+    <div class="step-title"><span>01</span><div><h2>Delivery Details</h2><p>Where should we send your pretty package?</p></div></div>
+    <div class="form-grid">
+      <label>Full Name<input name="name" type="text" placeholder="Your full name" required></label>
+      <label>Mobile Number<input name="mobile" type="tel" inputmode="numeric" pattern="[0-9]{10}" maxlength="10" placeholder="10-digit mobile number" required></label>
+      <label class="full">Email Address<input name="email" type="email" placeholder="you@example.com" required></label>
+      <label class="full">Address<textarea name="address" rows="3" placeholder="House / flat, street, area" required></textarea></label>
+      <label>City<input name="city" type="text" placeholder="City" required></label>
+      <label>State<input name="state" type="text" placeholder="State" required></label>
+      <label>Pincode<input name="pincode" type="text" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" placeholder="6-digit pincode" required></label>
+    </div>
+
+    <div class="payment-box">
+      <div class="step-title"><span>02</span><div><h2>Payment</h2><p>Online payment only</p></div></div>
+      <div class="payment-option"><div class="radio-dot"></div><div><strong>Secure Online Payment</strong><p>Pay using UPI, cards or other supported online methods.</p></div><span class="pay-icons">UPI · CARD</span></div>
+      <p class="payment-note">🔒 Your payment is processed securely. Cash on Delivery is not available.</p>
+    </div>
+
+    <button class="pay-button" type="submit">CONTINUE TO SECURE PAYMENT →</button>
+    <p class="checkout-note">By continuing, you confirm that your delivery details are correct.</p>
+  </form>
+
+  <aside class="order-card">
+    <div class="order-heading"><h2>Your Order</h2><a href="cart.html">Edit cart</a></div>
+    <div id="checkoutItems"></div>
+    <div class="order-line"><span>Subtotal</span><strong id="checkoutSubtotal">₹0</strong></div>
+    <div class="order-line"><span>Shipping</span><strong id="checkoutShipping">₹0</strong></div>
+    <div class="order-total"><span>Total</span><strong id="checkoutTotal">₹0</strong></div>
+    <div class="mini-trust">🎁 Gift-ready packaging<br>📦 Carefully packed<br>💗 Curated by Blush &amp; Bow</div>
+  </aside>
+</div>
+</section>
+</main>
+<footer><div class="container footer-grid"><div><h3>Blush &amp; Bow</h3><p>Little things, beautifully packed.</p></div><div><h4>Quick Links</h4><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="index.html#hampers">Gift Hampers</a></div><div><h4>Help</h4><a href="index.html#contact">Contact</a><a href="#">Shipping &amp; Returns</a><a href="#">Privacy Policy</a></div></div><div class="copyright">© 2026 Blush &amp; Bow. All rights reserved.</div></footer>
+<script src="script.js"></script>
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const cart = getCart();
+  if (!cart.length) { window.location.href = 'cart.html'; return; }
+  const items = document.getElementById('checkoutItems');
+  items.innerHTML = cart.map(item => `<div class="checkout-item"><div class="item-bubble">B&amp;B</div><div><strong>${item.name}</strong><small>Qty: ${item.quantity}</small></div><strong>${formatMoney(item.price * item.quantity)}</strong></div>`).join('');
+  document.getElementById('checkoutSubtotal').textContent = formatMoney(cartSubtotal());
+  document.getElementById('checkoutShipping').textContent = shippingCost() === 0 ? 'FREE' : formatMoney(shippingCost());
+  document.getElementById('checkoutTotal').textContent = formatMoney(cartTotal());
+
+  document.getElementById('checkoutForm').addEventListener('submit', e => {
+    e.preventDefault();
+    if (!e.target.reportValidity()) return;
+    const data = Object.fromEntries(new FormData(e.target).entries());
+    localStorage.setItem('blushAndBowPendingOrder', JSON.stringify({customer:data, items:cart, total:cartTotal(), createdAt:new Date().toISOString()}));
+    window.location.href = 'payment.html';
+  });
+});
+</script>
+</body>
+</html>

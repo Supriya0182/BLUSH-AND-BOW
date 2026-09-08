@@ -1,0 +1,277 @@
+/* BLUSH & BOW — PRODUCT PAGE */
+
+.product-page{
+  padding:75px 0;
+  background:linear-gradient(135deg,#fffaf7,#fae8ed);
+}
+
+.product-layout{
+  display:grid;
+  grid-template-columns:1.05fr .95fr;
+  gap:65px;
+  align-items:start;
+}
+
+.gallery{
+  position:sticky;
+  top:115px;
+}
+
+.main-photo{
+  height:560px;
+  border-radius:24px;
+  background:linear-gradient(145deg,#f8dfe5,#fff7f2);
+  border:1px solid var(--line);
+  box-shadow:var(--shadow);
+  display:grid;
+  place-items:center;
+  position:relative;
+  color:#b88792;
+  font-size:11px;
+  letter-spacing:2px;
+}
+
+.main-photo small{
+  position:absolute;
+  right:20px;
+  bottom:20px;
+  background:var(--pink);
+  color:white;
+  border-radius:50%;
+  padding:12px 10px;
+  font-family:Georgia,serif;
+  font-size:15px;
+}
+
+.thumbs{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:10px;
+  margin-top:12px;
+}
+
+.thumb{
+  height:75px;
+  border:1px solid var(--line);
+  background:white;
+  border-radius:12px;
+  color:#a87984;
+  font-size:9px;
+  letter-spacing:1px;
+  cursor:pointer;
+}
+
+.thumb.active,.thumb:hover{
+  border:2px solid var(--pink);
+}
+
+.product-copy{
+  padding-top:15px;
+}
+
+.product-tag{
+  color:var(--gold);
+  letter-spacing:2px;
+  font-size:10px;
+}
+
+.product-copy h1{
+  margin:10px 0;
+  color:var(--pink-dark);
+  font:500 clamp(42px,5vw,60px) Georgia,serif;
+  line-height:1.05;
+}
+
+.rating{
+  color:var(--gold);
+  letter-spacing:2px;
+  margin:12px 0;
+}
+
+.rating span{
+  color:var(--muted);
+  font-size:12px;
+  letter-spacing:0;
+  margin-left:8px;
+}
+
+.price{
+  color:var(--pink-dark);
+  font-size:30px;
+  font-weight:700;
+  margin:15px 0;
+}
+
+.intro{
+  color:var(--muted);
+  max-width:520px;
+  font-size:16px;
+}
+
+.included{
+  margin-top:30px;
+  padding:24px;
+  background:white;
+  border:1px solid var(--line);
+  border-radius:18px;
+}
+
+.included h2,.details h2{
+  color:var(--pink-dark);
+  font:500 23px Georgia,serif;
+  margin-bottom:12px;
+}
+
+.included ul{
+  list-style:none;
+}
+
+.included li{
+  color:var(--muted);
+  font-size:14px;
+  padding:5px 0;
+}
+
+.included li::before{
+  content:"♡";
+  color:var(--pink);
+  margin-right:9px;
+}
+
+.quantity{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin:25px 0;
+}
+
+.quantity>span{
+  font-weight:600;
+}
+
+.qty-control{
+  display:flex;
+  align-items:center;
+  border:1px solid var(--line);
+  border-radius:25px;
+  overflow:hidden;
+  background:white;
+}
+
+.qty-control button{
+  border:0;
+  background:white;
+  width:42px;
+  height:40px;
+  cursor:pointer;
+  font-size:20px;
+  color:var(--pink-dark);
+}
+
+.qty-control strong{
+  width:35px;
+  text-align:center;
+}
+
+.actions{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:12px;
+}
+
+.actions button{
+  padding:15px;
+  border-radius:30px;
+  cursor:pointer;
+  font-size:12px;
+  letter-spacing:1px;
+}
+
+.add-button{
+  background:white;
+  border:1px solid var(--pink-dark);
+  color:var(--pink-dark);
+}
+
+.buy-button{
+  background:var(--pink-dark);
+  border:1px solid var(--pink-dark);
+  color:white;
+}
+
+.actions button:hover{
+  transform:translateY(-2px);
+}
+
+.trust{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:8px;
+  margin-top:28px;
+  padding-top:24px;
+  border-top:1px solid var(--line);
+}
+
+.trust div{
+  text-align:center;
+}
+
+.trust span{
+  display:block;
+  font-size:24px;
+}
+
+.trust strong,.trust small{
+  display:block;
+}
+
+.trust strong{
+  color:var(--pink-dark);
+  font:500 14px Georgia,serif;
+  margin-top:4px;
+}
+
+.trust small{
+  color:var(--muted);
+  font-size:10px;
+}
+
+.details{
+  padding:70px 0;
+  background:#fff;
+}
+
+.details-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:50px;
+}
+
+.details-grid p{
+  color:var(--muted);
+  font-size:14px;
+}
+
+@media(max-width:850px){
+  .product-layout{
+    grid-template-columns:1fr;
+    gap:35px;
+  }
+  .gallery{position:static}
+  .main-photo{height:480px}
+  .details-grid{
+    grid-template-columns:1fr;
+    gap:30px;
+  }
+}
+
+@media(max-width:520px){
+  .product-page{padding:45px 0}
+  .main-photo{height:360px}
+  .product-copy h1{font-size:42px}
+  .actions{grid-template-columns:1fr}
+  .trust{
+    grid-template-columns:1fr;
+    gap:18px;
+  }
+}

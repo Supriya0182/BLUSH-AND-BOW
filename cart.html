@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Your Cart | Blush & Bow</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="cart.css">
+</head>
+<body>
+
+<div class="top-bar">🎀 FREE SHIPPING ON ORDERS ABOVE ₹499 🎀</div>
+
+<header class="site-header">
+  <div class="nav container">
+    <a href="index.html" class="brand">
+      <span class="brand-name">Blush &amp; Bow</span>
+      <span class="brand-sub">BEAUTIFULLY PACKED</span>
+    </a>
+    <nav class="menu">
+      <a href="index.html">Home</a>
+      <a href="shop.html">Shop</a>
+      <a href="index.html#hampers">Gift Hampers</a>
+      <a href="index.html#about">About Us</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="nav-actions">
+      <button>⌕</button>
+      <button class="cart-icon" onclick="location.href='cart.html'" aria-label="Cart">
+        🛍 <span data-cart-count>0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<main>
+<section class="cart-hero">
+  <div class="container">
+    <p class="eyebrow">B&amp;B SHOPPING BAG</p>
+    <h1>Your Cart</h1>
+    <p>Almost yours. Let's make it pretty. ♡</p>
+  </div>
+</section>
+
+<section class="cart-section">
+<div class="container cart-layout">
+
+  <div>
+    <div class="cart-items" id="cartItems"></div>
+    <div class="continue-shopping"><a href="shop.html">← Continue Shopping</a></div>
+  </div>
+
+  <aside class="summary" id="cartSummary">
+    <h2>Order Summary</h2>
+    <div class="summary-line"><span>Subtotal</span><strong id="subtotal">₹0</strong></div>
+    <div class="summary-line"><span>Shipping</span><strong id="shipping">₹0</strong></div>
+    <div class="free-shipping-note">✨ Free shipping on orders above ₹499</div>
+
+    <div class="summary-total">
+      <span>Total</span><strong id="total">₹0</strong>
+    </div>
+
+    <button class="checkout-button" onclick="location.href='checkout.html'">
+      PROCEED TO CHECKOUT →
+    </button>
+
+    <p class="secure">🔒 Secure checkout • Easy payments</p>
+  </aside>
+
+</div>
+
+<div class="empty-cart" id="emptyCart">
+  <div>🛍️</div>
+  <h2>Your cart is empty</h2>
+  <p>Let's find something pretty for you.</p>
+  <a href="shop.html">SHOP NOW</a>
+</div>
+</section>
+</main>
+
+<footer>
+<div class="container footer-grid">
+  <div><h3>Blush &amp; Bow</h3><p>Little things, beautifully packed.</p></div>
+  <div><h4>Quick Links</h4><a href="index.html">Home</a><a href="shop.html">Shop</a><a href="index.html#hampers">Gift Hampers</a></div>
+  <div><h4>Help</h4><a href="index.html#contact">Contact</a><a href="#">Shipping &amp; Returns</a><a href="#">Privacy Policy</a></div>
+</div>
+<div class="copyright">© 2026 Blush &amp; Bow. All rights reserved.</div>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
