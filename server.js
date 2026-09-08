@@ -7,7 +7,7 @@ const path = require('path');
 const querystring = require('querystring');
 
 const PORT = Number(process.env.PORT || 3000);
-const KEY_ID = process.env.RAZORPAY_KEY_ID || 'rzp_test_TZEB67quDQ3rCC';
+const KEY_ID = process.env.RAZORPAY_KEY_ID || '';
 const KEY_SECRET = process.env.RAZORPAY_KEY_SECRET || '';
 const ROOT = path.join(__dirname, '..');
 
