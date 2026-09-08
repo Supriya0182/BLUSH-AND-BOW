@@ -30,6 +30,11 @@ function safePath(urlPath){ const clean=decodeURIComponent(urlPath.split('?')[0]
 const server=http.createServer(async (req,res)=>{
   if(req.method==='OPTIONS'){res.writeHead(204,{'Access-Control-Allow-Origin':'*','Access-Control-Allow-Methods':'GET,POST,OPTIONS','Access-Control-Allow-Headers':'Content-Type'});return res.end();}
   try {
+        const url = new URL(req.url, `http://${req.headers.host}`);
+
+    if (req.method === 'GET' && url.pathname === '/healthz') {
+      return send(res, 200, { status: 'ok' });
+    }
     if(req.url==='/api/config' && req.method==='GET') return send(res,200,{keyId:KEY_ID});
     if(req.url==='/api/create-order' && req.method==='POST'){
       const b=await readBody(req); const amount=Math.round(Number(b.amount)*100);
