@@ -22,9 +22,27 @@
 <a href="index.html#contact">Contact</a>
 </nav>
 <div class="nav-actions">
-<button aria-label="Search">⌕</button>
-<button aria-label="Account">♙</button>
-<button class="cart-icon" aria-label="Cart" onclick="location.href='cart.html'">🛍 <span data-cart-count>0</span></button>
+
+    <!-- SEARCH ICON -->
+    <button aria-label="Search" class="image-icon-btn">
+        <img src="images/search-icon.png" alt="Search">
+    </button>
+
+    <!-- ACCOUNT ICON -->
+    <button aria-label="Account" class="image-icon-btn">
+        <img src="images/account-icon.png" alt="Account">
+    </button>
+
+    <!-- CART ICON -->
+    <button
+        class="cart-icon image-icon-btn"
+        aria-label="Cart"
+        onclick="location.href='cart.html'"
+    >
+        <img src="images/cart-icon.png" alt="Cart">
+        <span data-cart-count>0</span>
+    </button>
+
 </div>
 </div>
 </header>
@@ -48,8 +66,24 @@
 <span class="clip clip-1"></span><span class="clip clip-2"></span><span class="clip clip-3"></span><span class="clip clip-4"></span>
 </div></div>
 <img class="mascot" src="images/mascot.png" alt="Blush & Bow cute mascot">
-</div>
-</div>
+<button class="cart-icon" aria-label="Cart" onclick="location.href='cart.html'">
+    
+    <svg xmlns="http://www.w3.org/2000/svg"
+         viewBox="0 0 576 512"
+         aria-hidden="true"
+         style="
+            width:20px;
+            height:20px;
+            fill:#D98FA5;
+            vertical-align:middle;
+         ">
+        
+        <path d="M576 216c0-13.3-10.7-24-24-24h-80L375.7 40.9c-6.6-11.9-21.6-16.2-33.5-9.6s-16.2 21.6-9.6 33.5L403.1 192H172.9L243.4 64.8c6.6-11.9 2.3-26.9-9.6-33.5s-26.9-2.3-33.5 9.6L104 192H24c-13.3 0-24 10.7-24 24s10.7 24 24 24h16l50.9 203.7C93.5 459.5 103.8 468 117 468h342c13.2 0 23.5-8.5 26.1-24.3L536 240h16c13.3 0 24-10.7 24-24zM136 424L104 288h368l-32 136H136zm72-88c-13.3 0-24 10.7-24 24v40c0 13.3 10.7 24 24 24s24-10.7 24-24v-40c0-13.3-10.7-24-24-24zm80 0c-13.3 0-24 10.7-24 24v40c0 13.3 10.7 24 24 24s24-10.7 24-24v-40c0-13.3-10.7-24-24-24zm80 0c-13.3 0-24 10.7-24 24v40c0 13.3 10.7 24 24 24s24-10.7 24-24v-40c0-13.3-10.7-24-24-24z"/>
+    </svg>
+
+    <span data-cart-count>0</span>
+
+</button>
 </section>
 
 <section class="section" id="shop">
